@@ -1,0 +1,17 @@
+body {
+   
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.login-box {
+    width: 25%;
+    border-radius: .3rem;
+}
+
+@media screen and (max-width: 480px) {
+    .login-box {
+        width: 100%
+    }
+}
+

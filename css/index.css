@@ -1,0 +1,42 @@
+.db-section {
+    display: none;
+}
+
+.db-section.active {
+    display: block;
+    transition: display 0.3s fade-in;
+   
+}
+
+.db-section.loading {
+    display: block;
+    transition: display 0.3s fade-in;
+    background-image: url('../img/_21_loading-gif-transparent-background_ManageWP-Loader-by-Milica-Spasojevic-for-GoDaddy-on-Dribbble.gif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 0%;
+}
+
+
+.bg-psu {
+    background-image: linear-gradient(to left, #fe6f31, #fe6f31, #fe6f31, yellow);
+}
+
+.navi-link {
+    text-decoration: none;
+    color: #000;
+}
+
+.navi-link.active {
+    color: #0a58ca;
+}
+
+.dir-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.dir-link:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+}
