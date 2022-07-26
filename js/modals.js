@@ -2,14 +2,25 @@
 
 var dirModal = document.getElementById('dirModal')
 dirModal.addEventListener('shown.bs.modal', function (event) {
-    var n = dir.find(x=>x.dir_idx === currentDir).dir_name;
-    $(".active-dir").text(n);
+    if (dir.length > 0){
+
+        var n = dir.find(x=>x.dir_idx === currentDir).dir_name;
+        $(".active-dir").text(n);
+    } else {
+        $(".active-dir").text("root");
+    }
 })
 
 var fileModal = document.getElementById('fileModal')
 fileModal.addEventListener('shown.bs.modal', function (event) {
-    var n = dir.find(x=>x.dir_idx === currentDir).dir_name;
-    $(".active-dir").text(n);
+
+    if (dir.length > 0){
+
+        var n = dir.find(x=>x.dir_idx === currentDir).dir_name;
+        $(".active-dir").text(n);
+    } else {
+        $(".active-dir").text("root");
+    }
 })
 
 
@@ -72,33 +83,61 @@ function saveDir(){
 
 
 async function saveFile(){
+    if ($("#accArea").val() == "" || $("#accArea").val() == 0 || $("#accArea").val() == null ){
+        $(".file-error").text("Please Select Accreditation Area");
+        return false;
+        
+    }
     $(".file-stat").text("");
     var x = document.getElementById('accFile');
     var n = x.files[0].name
+    console.log($("#accArea").val());
+    var filesInAccreArea;
+    console.log(files.length);
+    var validName = true;
+    if (files.length>0){
+        filesInAccreArea = files.filter(x=>x.accre_area === parseInt($("#accArea").val()));
+        console.log(filesInAccreArea, $("#accArea").val());
 
-
-    let formData = new FormData(); 
-  formData.append("file", x.files[0]);
-//   formData.append("fileName", $("#accFileName").val());
-  formData.append("accArea", $("#accArea").val());
-  formData.append("a", 2);
-  formData.append("parent", currentDir);
-  formData.append("creator", activeUser);
-  await fetch('php/files.php', {
-    method: "POST", 
-    body: formData
-  }).then(response=>response.json())
-  .then(data=>{
-    if (data.result){
-        var f = {accre_area: $("#accArea").val(), created_at: data.insertDate, created_by: activeUser, file_ext: data.ext, file_idx: data.idx, file_name: n, parent_dir: currentDir}
-        files.push(f);
-        contentPop();
-        $(".file-success").text(data.message);
-    } else {
-        $(".file-error").text(data.message);
     }
-  
-  }); 
+
+
+    $.each(filesInAccreArea, function(key, val){
+        if (val.file_name === n) {
+            validName = false;
+        }
+    });
+    
+    
+    if (validName) {
+      
+        let formData = new FormData(); 
+        formData.append("file", x.files[0]);
+      //   formData.append("fileName", $("#accFileName").val());
+        formData.append("accArea", $("#accArea").val());
+        formData.append("a", 2);
+        formData.append("parent", currentDir);
+        formData.append("creator", activeUser);
+        await fetch('php/files.php', {
+          method: "POST", 
+          body: formData
+        }).then(response=>response.json())
+        .then(data=>{
+          if (data.result){
+              var f = {accre_area: $("#accArea").val(), created_at: data.insertDate, created_by: activeUser, file_ext: data.ext, file_idx: data.idx, file_name: n, parent_dir: currentDir}
+              files.push(f);
+              contentPop();
+              $(".file-success").text(data.message);
+          } else {
+              $(".file-error").text(data.message);
+          }
+        
+        }); 
+    } else {
+        $(".file-error").text("A similar file with the same file name under that accreditation area already exists, please rename the file name before uploading it again");
+        return false;
+    }
+
  
 }
 

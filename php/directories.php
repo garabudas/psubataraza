@@ -19,6 +19,18 @@
 
   }
 
+  $directories = [
+    "Vision & Mission, Goals & Objectives",
+    "Faculty",
+    "Curriculum",
+    "Student Support",
+    "Research",
+    "Extension",
+    "Library",
+    "Physical",
+    "Laboratories",
+    "Administration"
+  ];
 
   function getDirs(){
     $conn = mysqli_connect(servername, dbuser, dbpw, dbname);

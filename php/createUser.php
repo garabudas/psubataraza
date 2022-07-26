@@ -17,7 +17,7 @@
     $pw = decode(trim($_POST["pw"]));
     $pword = password_hash($pw, PASSWORD_DEFAULT);
     $conn = new mysqli(servername, dbuser, dbpw, dbname);
-    $sql = "INSERT INTO dtest_users (`username`, `password`) VALUES ('$username', '$pword')";
+    $sql = "INSERT INTO users_table (`username`, `password`) VALUES ('$username', '$pword')";
  
     if ($conn->query($sql)){
         echo json_encode(array("result"=>true));

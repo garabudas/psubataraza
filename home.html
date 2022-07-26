@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accreditation Dashboard</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/63ea794447.js" crossorigin="anonymous"></script>
+  
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 </head>
@@ -31,7 +31,7 @@
           
         </ul>
         <a href="#" role="button" type="button" class="btn btn-link text-dark text-decoration-none"><img src="img/profile-removebg-preview.png" alt="profile logo" height="30" width="30"> <span id="logged-user"></span></a>
-        <a href="#" role="button" type="button" class="btn btn-link text-dark text-decoration-none" onclick="logout()">Log Out <i class="fas fa-sign-out-alt"></i></a>
+        <a href="#" role="button" type="button" class="btn btn-link text-dark text-decoration-none" onclick="logout()">Log Out <img src="img/logout.png" alt="logout" height="30" width="30"></a>
        
       </div>
     </div>
@@ -53,10 +53,11 @@
       </div>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb" id="breadcrumbs">
-          <li class="breadcrumb-item " aria-current="page">Root</li>
-         
+          <li class="breadcrumb-item active" aria-current="page">Root</li>
         </ol>
       </nav>
+
+      <button class="btn btn-link invisible mb-1" id="backButton">&larr; Go Back</button>
        <table class="table w-100" id="files-table">
         <thead class="thead-inverse">
           <tr>

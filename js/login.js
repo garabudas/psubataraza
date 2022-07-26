@@ -133,16 +133,21 @@ function encode(str) {
                     createCookie('usr_d', user, 5);
                     createCookie('userid', data.id, 5);
                     createCookie('usertype', data.usertype, 5);
-                    window.location.href="home";
+
                     if (r){
-                     
+                        
                         createCookie('rmb', true, 5);
                     } else {
                         createCookie('rmb', false, 5);
                     }
-    
-                  
-            
+                    
+                    
+                    if (data.usertype === 1){
+
+                        window.location.href="home";
+                    } else {
+                        window.location.href="accreditors";
+                    }
               
                   
                 } else {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accreditor Portal</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+   
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light border-bottom border-2">
+        <div class="container ">
+          <a class="navbar-brand fs-2 text-light" href="home"><img src="img/psu-logo.png" height="80" width="80" alt="smiley"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 invisible">
+              <li class="nav-item">
+                <a class="navi-link px-1" data-div="files" onclick="contentPop()" aria-current="page" href="#">Documents</a>
+              </li>
+              <li class="nav-item">
+                <a class="navi-link px-1" data-div="users" onclick="getUsers()" href="#">Users</a>
+              </li>
+            
+            
+              
+            </ul>
+            <a href="#" role="button" type="button" class="btn btn-link text-dark text-decoration-none"><img src="img/profile-removebg-preview.png" alt="profile logo" height="30" width="30"> <span id="logged-user"></span></a>
+            <a href="#" role="button" type="button" class="btn btn-link text-dark text-decoration-none" onclick="logout()">Log Out <img src="img/logout.png" alt="logout" height="30" width="30"></a>
+           
+          </div>
+        </div>
+      </nav>
+
+      <div class="container pt-4 min-vh-100" id="main">
+        <h5>Accreditation Areas</h5>
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <ul class="list-group">
+                    <li class="list-group-item" data-id="1" aria-current="true">Vision & Mission, Goals & Objectives</li>
+                    <li class="list-group-item" data-id="2">Faculty</li>
+                    <li class="list-group-item" data-id="3">Curriculum</li>
+                    <li class="list-group-item" data-id="4">Student Support</li>
+                    <li class="list-group-item" data-id="5">Research</li>
+                    <li class="list-group-item" data-id="6">Extension</li>
+                    <li class="list-group-item" data-id="7">Library</li>
+                    <li class="list-group-item" data-id="8">Physical Plants Facilities</li>
+                    <li class="list-group-item" data-id="9">Laboratories</li>
+                    <li class="list-group-item" data-id="10">Administration</li>
+                  </ul>
+            </div>
+
+
+            <div class="col-12 col-sm-8">
+                <h5>File Contents</h5>
+                <table class="table w-100" id="files-table">
+                    <thead class="thead-inverse">
+                      <tr>
+                        <th>Contents</th>
+                        <th>Date Created</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                   </table>
+            </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- footer -->
+<div class="container-fluid bg-light bg-gradient text-dark py-3 mt-3 border-top border-2">
+    <p class="fs-6 lh-sm"><small>&copy; dustylinks</small></p>
+  </div>
+</body>
+
+<script src="bootstrap/js/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script src="js/accre.js"></script>
+</html>

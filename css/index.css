@@ -31,6 +31,15 @@
     color: #0a58ca;
 }
 
+.breadcrumb-item:not(active) {
+   cursor: pointer;
+}
+
+.breadcrumb-item:not(:active):hover {
+    color: #0a58ca;
+    text-decoration: underline;
+ }
+
 .dir-link {
     color: #000;
     text-decoration: none;
@@ -39,4 +48,8 @@
 .dir-link:hover {
     color: #0a58ca;
     text-decoration: underline;
+}
+
+.list-group-item {
+    cursor: pointer;
 }

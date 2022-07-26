@@ -1,6 +1,9 @@
 var dir = [];
 var files = [];
 var currentDir = 1;
+var prevDir;
+
+var navArr = [1];
 
 const accreAreas = [
     {id:1,accre_name:'Vision & Mission, Goals & Objectives'},
@@ -93,6 +96,7 @@ function clearDir(){
     getFiles();
     getDirs();
     clearDir();
+    $("#accArea").val(0);
       $('#newProfileForm').trigger("reset");
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
@@ -115,6 +119,8 @@ function clearDir(){
 
     var dirs = dir.filter(x=>x.dir_parent === currentDir);
     var f = files.filter(x=>x.parent_dir===currentDir);
+    
+   
      //populate for directories
     if (dirs.length > 0){
         $.each(dirs, function(key, val){
@@ -134,9 +140,11 @@ function clearDir(){
     if (f.length > 0){
         $.each(f, function(key, val){
             var ext = val.file_ext;
+            var pf = accreAreas.find(x=>x.id === parseInt(val.accre_area)).accre_name;
+            var ref = (ext === "pdf") ? "ViewerJS/#../" : "";
             $("#files-table > tbody").append(
                 '<tr>'+
-                    '<td><a class="dir-link"  href="javascript:void(0);"><img src="img/file-icons/'+ext+'.png" class="me-3" alt="." height="30" width="30">'+ val.file_name +'</a></td>'+
+                    '<td><a class="dir-link"  href="'+ref+'documents/'+pf+'/'+val.file_name+'" target="_blank"><img src="img/file-icons/'+ext+'.png" class="me-3" alt="." height="30" width="30">'+ val.file_name +'</a></td>'+
                     '<td>'+ formatDate(val.created_at) +'</td>'+
               
                     '<td class="text-end"><button class="btn btn-danger btn-sm mb-3 mb-sm-0 me-0 me-sm-3">Delete</button><button class="btn btn-primary btn-sm">Rename</button></td>'+
@@ -145,15 +153,68 @@ function clearDir(){
             );    
         });
     }
-    $('#files-table').DataTable();
+    if (currentDir != 1){
+
+        navBreads();
+        $("#backButton").removeClass('invisible');
+    } else {
+        $("#backButton").addClass('invisible');
+    }
+
+
+  
+    $('#files-table').DataTable({
+        order: [[2, 'asc']],
+    });
   
 
   }
 
+  function getDirFiles(){
+
+  }
+
+
+  function navBreads(){
+    
+      $("#breadcrumbs").html('');
+      var p = navArr.slice(-1)[0];
+      $.each(navArr, function(key, val){
+        // console.log(val);
+        var dn = dir.find(x=>x.dir_idx === parseInt(val)).dir_name;
+      
+        var active = (parseInt(val) === p) ? "active" : "";
+        $("#breadcrumbs").append(
+            '<li class="breadcrumb-item '+active+'">'+dn+'</li>'
+        );
+      });
+  }
+
 
   function openDir(id){
+    navArr.push(id);
+    console.log(navArr);
+    prevDir = currentDir;
+    currentDir = parseInt(id);
+    var cd = dir.find(x=>x.dir_idx===id).dir_name;
     
+
+    $("#current-dir").text(cd);
+    contentPop();
   }
+
+  $("#backButton").click(function(){
+    navArr.pop();
+    currentDir = navArr.slice(-1)[0];
+    console.log(navArr);
+    if (currentDir == 1){
+        navBreads();
+    }
+    contentPop();
+  });
+
+
+
   function getDirs(){
     
     $.ajax({
@@ -191,6 +252,7 @@ function clearDir(){
                 files = data.files;
                     console.log(files);
             }
+            console.log(files.length);
             
             
           
