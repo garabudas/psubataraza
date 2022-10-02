@@ -91,13 +91,13 @@ async function saveFile(){
     $(".file-stat").text("");
     var x = document.getElementById('accFile');
     var n = x.files[0].name
-    console.log($("#accArea").val());
+   
     var filesInAccreArea;
-    console.log(files.length);
+ 
     var validName = true;
     if (files.length>0){
         filesInAccreArea = files.filter(x=>x.accre_area === parseInt($("#accArea").val()));
-        console.log(filesInAccreArea, $("#accArea").val());
+       
 
     }
 
@@ -107,8 +107,8 @@ async function saveFile(){
             validName = false;
         }
     });
-    
-    
+  
+    var fileDesc =  $("#accDesc").val();
     if (validName) {
       
         let formData = new FormData(); 
@@ -118,13 +118,15 @@ async function saveFile(){
         formData.append("a", 2);
         formData.append("parent", currentDir);
         formData.append("creator", activeUser);
+        formData.append("accDesc", fileDesc);
+
         await fetch('php/files.php', {
           method: "POST", 
           body: formData
         }).then(response=>response.json())
         .then(data=>{
           if (data.result){
-              var f = {accre_area: $("#accArea").val(), created_at: data.insertDate, created_by: activeUser, file_ext: data.ext, file_idx: data.idx, file_name: n, parent_dir: currentDir}
+              var f = {accre_area: $("#accArea").val(), created_at: data.insertDate, created_by: activeUser, file_ext: data.ext, file_idx: data.idx, file_name: n, parent_dir: currentDir, file_desc: fileDesc }
               files.push(f);
               contentPop();
               $(".file-success").text(data.message);

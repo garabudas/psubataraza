@@ -41,12 +41,12 @@
       $filename = $_FILES['file']['name'];
     
       $ext = getFileExt($filename);
-      // var_dump($filename);
-      // exit();
+   
       $accArea = $_POST["accArea"];
       $area = getLoc($accArea);
       $parent = $_POST["parent"];
       $creator = $_POST["creator"];
+      $accdesc = $_POST["accDesc"];
       $folder = getLoc($accArea);
     
       $loc = "../documents/".$folder."/".$filename;
@@ -55,8 +55,8 @@
        
         
         $conn = mysqli_connect(servername, dbuser, dbpw, dbname);
-        $stmt = mysqli_prepare($conn, "INSERT INTO accre_files (`file_name`, `parent_dir`, `created_by`, `file_ext`, `accre_area`) VALUES (?,?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, 'siisi', $filename, $parent, $creator, $ext, $accArea);
+        $stmt = mysqli_prepare($conn, "INSERT INTO accre_files (`file_name`,`file_desc`, `parent_dir`, `created_by`, `file_ext`, `accre_area`) VALUES (?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, 'ssiisi', $filename,$accdesc, $parent, $creator, $ext, $accArea);
         $stmt->execute();
         
         if ($stmt->affected_rows > 0){

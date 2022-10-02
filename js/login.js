@@ -140,9 +140,9 @@ function encode(str) {
                     } else {
                         createCookie('rmb', false, 5);
                     }
+                   
                     
-                    
-                    if (data.usertype === 1){
+                    if (data.usertype === "1"){
 
                         window.location.href="home";
                     } else {

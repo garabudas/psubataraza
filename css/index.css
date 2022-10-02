@@ -53,3 +53,67 @@
 .list-group-item {
     cursor: pointer;
 }
+
+.file-section {
+    overflow-y: scroll;
+}
+
+.bg-black {
+    background-color: #000;
+}
+
+.vh-90 {
+    min-height: 90vh;
+}
+
+.vh-80 {
+    min-height: 80vh;
+}
+
+.bg-accre-main {
+    background-image: linear-gradient(to left, #fe6f31, #b85327,#343a40, #212529,#000, #000);
+}
+
+.file-link {
+    border: none;
+    font-size: 14px;
+    transition: all 0.1s;
+}
+
+.file-link:hover, .file-link.active{
+    border: 1px solid #000;
+    border-radius: 4px;
+    transform: scale(1.1);
+    font-weight: 700;
+}
+
+.file-link.active{
+    border: 1px solid #fe6f31;
+}
+
+
+.file-link.active a{
+   font-weight: 700;
+}
+.file-col {
+    opacity: 0;
+    cursor: pointer;
+    
+    
+}
+
+.file-col.shown {
+    opacity: 1;
+    transition: all 0.4s;
+}
+
+.file-col.active {
+    box-shadow: 0 0 10px #fe6f31;
+}
+
+
+.col-icon {
+    position: absolute;
+    top: 0rem;
+    left: -2rem;
+}
